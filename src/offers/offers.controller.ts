@@ -3,7 +3,6 @@ import { OffersService } from './offers.service';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
 import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
-import { ParsePaginationIntPipe } from 'src/common/pipes/parse-pagination-int.pipe';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Controller('offers')
@@ -16,7 +15,7 @@ export class OffersController {
   }
 
   @Get()
-  findAll(@Query(ParsePaginationIntPipe) paginationDto: PaginationDto) {
+  findAll(@Query() paginationDto: PaginationDto) {
     return this.offersService.findAll(paginationDto);
   }
 

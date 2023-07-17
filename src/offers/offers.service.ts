@@ -74,11 +74,9 @@ export class OffersService {
 
   private handelDBException(error: any) {
     if (error.code === 11000) {
-      throw new BadRequestException('Offer already exists');
+      throw new BadRequestException(`Offer already exists, ${JSON.stringify(error.keyValue)}`);
     }
     this.logger.error(error);
-    //TODO: Eliminar el console.log en producion
-    console.log(error);
     throw new InternalServerErrorException('Unexpected error, check server logs');
   }
 }
