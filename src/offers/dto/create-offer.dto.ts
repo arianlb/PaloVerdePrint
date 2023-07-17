@@ -1,4 +1,4 @@
-import { IsArray, IsOptional, IsString, MinLength, } from "class-validator";
+import { IsArray, IsDecimal, IsInt, IsNumber, IsOptional, IsString, MinLength, } from "class-validator";
 
 export class CreateOfferDto {
     @IsString()
@@ -9,11 +9,12 @@ export class CreateOfferDto {
     @MinLength(1)
     material: string;
 
-    @IsArray()
     @IsOptional()
+    @IsArray()
+    @IsInt({ each: true })
     sizes?: number[];
 
-    @IsArray()
     @IsOptional()
+    @IsArray()
     prices?: number[];
 }
