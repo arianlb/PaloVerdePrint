@@ -11,9 +11,9 @@ export class CreateOfferDto {
 
     @IsArray()
     @IsOptional()
-    sizes: number[];
+    sizes?: number[];
 
     @IsArray()
     @IsOptional()
-    prices: number[];
+    prices?: number[];
 }
