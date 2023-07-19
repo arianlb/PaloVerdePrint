@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { OffersService } from './offers.service';
 import { OffersController } from './offers.controller';
-import { Offer, OfferSchema } from './entities/offer.entity';
+import { Offer, OfferSchema } from './schemas/offer.schema';
 
 @Module({
   controllers: [OffersController],

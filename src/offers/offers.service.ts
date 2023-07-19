@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import { BadRequestException, Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Offer } from './entities/offer.entity';
+import { Offer } from './schemas/offer.schema';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
