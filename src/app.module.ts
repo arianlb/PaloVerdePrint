@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { OffersModule } from './offers/offers.module';
 import { CommonModule } from './common/common.module';
-import { ImagesModule } from './images/images.module';
+import { PicturesModule } from './pictures/pictures.module';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import { ImagesModule } from './images/images.module';
     MongooseModule.forRoot(process.env.MONGODB_CNN),
     OffersModule,
     CommonModule,
-    ImagesModule
+    PicturesModule
   ],
 })
 export class AppModule { }
