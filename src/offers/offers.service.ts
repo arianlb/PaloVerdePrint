@@ -14,28 +14,28 @@ export class OffersService {
     private readonly offerModel: Model<Offer>
   ) { }
 
-  async create(createOfferDto: CreateOfferDto) {
+  async create(createOfferDto: CreateOfferDto): Promise<Offer> {
     try {
-      return await this.offerModel.create(createOfferDto);
+      return this.offerModel.create(createOfferDto);
 
     } catch (error) {
       this.handelDBException(error);
     }
   }
 
-  async findAll(paginationDto: PaginationDto) {
+  async findAll(paginationDto: PaginationDto): Promise<Offer[]> {
     try {
       const { limit = 10, offset = 0 } = paginationDto;
-      return await this.offerModel.find().limit(limit).skip(offset);
+      return this.offerModel.find().limit(limit).skip(offset).exec();
 
     } catch (error) {
       this.handelDBException(error);
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Offer> {
     try {
-      const offer = await this.offerModel.findById(id);
+      const offer = await this.offerModel.findById(id).exec();
       if (!offer) {
         throw new NotFoundException(`Offer with id: '${id}' not found`);
       }
@@ -46,9 +46,9 @@ export class OffersService {
     }
   }
 
-  async update(id: string, updateOfferDto: UpdateOfferDto) {
+  async update(id: string, updateOfferDto: UpdateOfferDto): Promise<Offer> {
     try {
-      const offer = await this.offerModel.findByIdAndUpdate(id, updateOfferDto, { new: true });
+      const offer = await this.offerModel.findByIdAndUpdate(id, updateOfferDto, { new: true }).exec();
       if (!offer) {
         throw new NotFoundException(`Offer with id: '${id}' not found`);
       }
@@ -61,7 +61,7 @@ export class OffersService {
 
   async remove(id: string) {
     try {
-      const offer = await this.offerModel.findByIdAndDelete(id);
+      const offer = await this.offerModel.findByIdAndDelete(id).exec();
       if (!offer) {
         throw new NotFoundException(`Offer with id: '${id}' not found`);
       }
