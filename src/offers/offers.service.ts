@@ -72,7 +72,7 @@ export class OffersService {
     }
   }
 
-  async addPrice(id: string, price: any) {
+  async addPrice(id: string, price: any): Promise<Offer> {
     try {
       const offer = await this.offerModel.findById(id).exec();
       if (!offer) {

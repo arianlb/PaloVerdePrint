@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { OffersModule } from './offers/offers.module';
 import { CommonModule } from './common/common.module';
 import { PicturesModule } from './pictures/pictures.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { PicturesModule } from './pictures/pictures.module';
     MongooseModule.forRoot(process.env.MONGODB_CNN),
     OffersModule,
     CommonModule,
-    PicturesModule
+    PicturesModule,
+    OrdersModule
   ],
 })
 export class AppModule { }
