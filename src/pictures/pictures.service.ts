@@ -23,7 +23,7 @@ export class PicturesService {
     }
   }
 
-  async findAll(paginationDto: PaginationDto) {
+  async findAll(paginationDto: PaginationDto): Promise<Picture[]> {
     try {
       const { limit = 10, offset = 0 } = paginationDto;
       return this.pictureModel.find().limit(limit).skip(offset).exec();
@@ -33,7 +33,7 @@ export class PicturesService {
     }
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Picture> {
     try {
       const picture = await this.pictureModel.findById(id).exec();
       if (!picture) {
@@ -46,7 +46,7 @@ export class PicturesService {
     }
   }
 
-  async update(id: string, updatePictureDto: UpdatePictureDto) {
+  async update(id: string, updatePictureDto: UpdatePictureDto): Promise<Picture> {
     try {
       const picture = await this.pictureModel.findByIdAndUpdate(id, updatePictureDto, { new: true }).exec();
       if (!picture) {
@@ -59,7 +59,7 @@ export class PicturesService {
     }
   }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<string> {
     try {
       const picture = await this.pictureModel.findByIdAndDelete(id).exec();
       if (!picture) {

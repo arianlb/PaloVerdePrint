@@ -72,6 +72,20 @@ export class OffersService {
     }
   }
 
+  async addPrice(id: string, price: any) {
+    try {
+      const offer = await this.offerModel.findById(id).exec();
+      if (!offer) {
+        throw new NotFoundException(`Offer with id: '${id}' not found`);
+      }
+      offer.prices.push(price);
+      return offer.save();
+
+    } catch (error) {
+      this.handelDBException(error);
+    }
+  }
+
   private handelDBException(error: any) {
     if (error.code === 11000) {
       throw new BadRequestException(`Offer already exists, ${JSON.stringify(error.keyValue)}`);

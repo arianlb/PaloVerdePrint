@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { OffersService } from './offers.service';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
+import { CreatePriceDto } from './dto/create-price.dto';
 import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 
@@ -32,5 +33,10 @@ export class OffersController {
   @Delete(':id')
   remove(@Param('id', ParseMongoIdPipe) id: string) {
     return this.offersService.remove(id);
+  }
+
+  @Post(':id/prices')
+  addPrice(@Param('id', ParseMongoIdPipe) id: string, @Body() createPriceDto: CreatePriceDto) {
+    return this.offersService.addPrice(id, createPriceDto);
   }
 }
