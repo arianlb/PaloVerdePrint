@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { PicturesService } from './pictures.service';
 import { CreatePictureDto } from './dto/create-picture.dto';
 import { UpdatePictureDto } from './dto/update-picture.dto';
@@ -7,11 +8,17 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Controller('pictures')
 export class PicturesController {
-  constructor(private readonly picturesService: PicturesService) { }
+  constructor(
+    private readonly picturesService: PicturesService
+  ) { }
 
   @Post()
-  create(@Body() createPictureDto: CreatePictureDto) {
-    return this.picturesService.create(createPictureDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(
+    @Body() createPictureDto: CreatePictureDto,
+    @UploadedFile() file: Express.Multer.File
+  ) {
+    return this.picturesService.create(createPictureDto, file);
   }
 
   @Get()

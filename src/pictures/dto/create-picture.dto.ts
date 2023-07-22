@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import { IsNumber, IsOptional, IsString, Min } from "class-validator";
 
 export class CreatePictureDto {
@@ -6,8 +7,9 @@ export class CreatePictureDto {
 
     @IsOptional()
     @IsString()
-    link?: string;
+    url?: string;
 
+    @Type(() => Number)
     @IsNumber()
     @Min(0)
     price: number;

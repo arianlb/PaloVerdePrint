@@ -7,7 +7,7 @@ export class Picture extends Document {
     name: string;
 
     @Prop({ default: 'No image' })
-    link: string;
+    url: string;
 
     @Prop({ required: true })
     price: number;
