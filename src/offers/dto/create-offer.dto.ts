@@ -1,4 +1,4 @@
-import { IsArray, IsOptional, IsString, MinLength, } from "class-validator";
+import { IsString, MinLength, } from "class-validator";
 
 export class CreateOfferDto {
     @IsString()

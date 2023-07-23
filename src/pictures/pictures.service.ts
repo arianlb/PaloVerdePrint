@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { BadRequestException, Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreatePictureDto } from './dto/create-picture.dto';
 import { UpdatePictureDto } from './dto/update-picture.dto';
@@ -13,7 +13,6 @@ export class PicturesService {
   constructor(
     @InjectModel(Picture.name)
     private readonly pictureModel: Model<Picture>,
-    @Inject(CloudinaryService)
     private readonly cloudinaryService: CloudinaryService
   ) { }
 
