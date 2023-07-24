@@ -4,7 +4,7 @@ import { Document } from 'mongoose';
 @Schema()
 export class Price extends Document {
     @Prop({ required: true })
-    cost: number;
+    value: number;
 
     @Prop({ required: true })
     high: number;

@@ -3,7 +3,7 @@ import { IsInt, IsNumber, Min, IsPositive } from "class-validator";
 export class CreatePriceDto {
     @IsNumber()
     @Min(0)
-    cost: number;
+    value: number;
 
     @IsInt()
     @IsPositive()
