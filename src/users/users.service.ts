@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { BadRequestException, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
@@ -8,7 +9,7 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class UsersService {
-  private readonly logger = new Logger('OrdersService');
+  private readonly logger = new Logger('UsersService');
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<User>
@@ -16,7 +17,8 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     try {
-      return this.userModel.create(createUserDto);
+      createUserDto.password = bcrypt.hashSync(createUserDto.password, 10);
+      return await this.userModel.create(createUserDto);
 
     } catch (error) {
       this.handelDBException(error);

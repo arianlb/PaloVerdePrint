@@ -86,7 +86,7 @@ export class OffersService {
     }
   }
 
-  private handelDBException(error: any) {
+  private handelDBException(error: any): never {
     if (error.code === 11000) {
       throw new BadRequestException(`Offer already exists, ${JSON.stringify(error.keyValue)}`);
     }
