@@ -26,52 +26,32 @@ export class UsersService {
   }
 
   async findAll(paginationDto: PaginationDto): Promise<User[]> {
-    try {
-      const { limit = 10, offset = 0 } = paginationDto;
-      return this.userModel.find().limit(limit).skip(offset).exec();
-
-    } catch (error) {
-      this.handelDBException(error);
-    }
+    const { limit = 10, offset = 0 } = paginationDto;
+    return this.userModel.find().limit(limit).skip(offset).exec();
   }
 
   async findOne(id: string): Promise<User> {
-    try {
-      const user = await this.userModel.findById(id).exec();
-      if (!user) {
-        throw new BadRequestException(`User with id: '${id}' not found`);
-      }
-      return user;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const user = await this.userModel.findById(id).exec();
+    if (!user) {
+      throw new BadRequestException(`User with id: '${id}' not found`);
     }
+    return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    try {
-      const user = await this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true }).exec();
-      if (!user) {
-        throw new BadRequestException(`User with id: '${id}' not found`);
-      }
-      return user;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const user = await this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true }).exec();
+    if (!user) {
+      throw new BadRequestException(`User with id: '${id}' not found`);
     }
+    return user;
   }
 
   async remove(id: string): Promise<string> {
-    try {
-      const user = await this.userModel.findByIdAndDelete(id).exec();
-      if (!user) {
-        throw new BadRequestException(`User with id: '${id}' not found`);
-      }
-      return `User with the id: '${id}' was removed`;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const user = await this.userModel.findByIdAndDelete(id).exec();
+    if (!user) {
+      throw new BadRequestException(`User with id: '${id}' not found`);
     }
+    return `User with the id: '${id}' was removed`;
   }
 
   private handelDBException(error: any) {

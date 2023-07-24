@@ -30,60 +30,40 @@ export class PicturesService {
   }
 
   async findAll(paginationDto: PaginationDto): Promise<Picture[]> {
-    try {
-      const { limit = 10, offset = 0 } = paginationDto;
-      return this.pictureModel.find().limit(limit).skip(offset).exec();
-
-    } catch (error) {
-      this.handelDBException(error);
-    }
+    const { limit = 10, offset = 0 } = paginationDto;
+    return this.pictureModel.find().limit(limit).skip(offset).exec();
   }
 
   async findOne(id: string): Promise<Picture> {
-    try {
-      const picture = await this.pictureModel.findById(id).exec();
-      if (!picture) {
-        throw new BadRequestException(`Picture with id: '${id}' not found`);
-      }
-      return picture;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const picture = await this.pictureModel.findById(id).exec();
+    if (!picture) {
+      throw new BadRequestException(`Picture with id: '${id}' not found`);
     }
+    return picture;
   }
 
   async update(id: string, updatePictureDto: UpdatePictureDto): Promise<Picture> {
-    try {
-      const picture = await this.pictureModel.findByIdAndUpdate(id, updatePictureDto, { new: true }).exec();
-      if (!picture) {
-        throw new BadRequestException(`Picture with id: '${id}' not found`);
-      }
-      return picture;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const picture = await this.pictureModel.findByIdAndUpdate(id, updatePictureDto, { new: true }).exec();
+    if (!picture) {
+      throw new BadRequestException(`Picture with id: '${id}' not found`);
     }
+    return picture;
   }
 
   async remove(id: string): Promise<string> {
-    try {
-      const picture = await this.pictureModel.findById(id).exec();
-      if (!picture) {
-        throw new BadRequestException(`Picture with id: '${id}' not found`);
-      }
-
-      //TODO: Hacer esto mejor
-      if (picture.url !== 'No image') {
-        const publicId = picture.url.split('/').pop().split('.')[0];
-        await this.cloudinaryService.deleteFile(publicId);
-      }
-
-      await this.pictureModel.findByIdAndDelete(id).exec();
-      return `Picture with the id: '${id}' was removed`;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const picture = await this.pictureModel.findById(id).exec();
+    if (!picture) {
+      throw new BadRequestException(`Picture with id: '${id}' not found`);
     }
+
+    //TODO: Hacer esto mejor
+    if (picture.url !== 'No image') {
+      const publicId = picture.url.split('/').pop().split('.')[0];
+      await this.cloudinaryService.deleteFile(publicId);
+    }
+
+    await this.pictureModel.findByIdAndDelete(id).exec();
+    return `Picture with the id: '${id}' was removed`;
   }
 
   private handelDBException(error: any): never {

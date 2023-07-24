@@ -25,52 +25,32 @@ export class OrdersService {
   }
 
   async findAll(paginationDto: PaginationDto): Promise<Order[]> {
-    try {
-      const { limit = 10, offset = 0 } = paginationDto;
-      return this.orderModel.find().limit(limit).skip(offset).exec();
-
-    } catch (error) {
-      this.handelDBException(error);
-    }
+    const { limit = 10, offset = 0 } = paginationDto;
+    return this.orderModel.find().limit(limit).skip(offset).exec();
   }
 
   async findOne(id: string): Promise<Order> {
-    try {
-      const order = await this.orderModel.findById(id).exec();
-      if (!order) {
-        throw new BadRequestException(`Order with id: '${id}' not found`);
-      }
-      return order;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const order = await this.orderModel.findById(id).exec();
+    if (!order) {
+      throw new BadRequestException(`Order with id: '${id}' not found`);
     }
+    return order;
   }
 
   async update(id: string, updateOrderDto: UpdateOrderDto): Promise<Order> {
-    try {
-      const order = await this.orderModel.findByIdAndUpdate(id, updateOrderDto, { new: true }).exec();
-      if (!order) {
-        throw new BadRequestException(`Order with id: '${id}' not found`);
-      }
-      return order;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const order = await this.orderModel.findByIdAndUpdate(id, updateOrderDto, { new: true }).exec();
+    if (!order) {
+      throw new BadRequestException(`Order with id: '${id}' not found`);
     }
+    return order;
   }
 
   async remove(id: string): Promise<string> {
-    try {
-      const order = await this.orderModel.findByIdAndDelete(id).exec();
-      if (!order) {
-        throw new BadRequestException(`Order with id: '${id}' not found`);
-      }
-      return `Order with the id: '${id}' was removed`;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const order = await this.orderModel.findByIdAndDelete(id).exec();
+    if (!order) {
+      throw new BadRequestException(`Order with id: '${id}' not found`);
     }
+    return `Order with the id: '${id}' was removed`;
   }
 
   private handelDBException(error: any): never {

@@ -24,66 +24,41 @@ export class OffersService {
   }
 
   async findAll(paginationDto: PaginationDto): Promise<Offer[]> {
-    try {
-      const { limit = 10, offset = 0 } = paginationDto;
-      return this.offerModel.find().limit(limit).skip(offset).exec();
-
-    } catch (error) {
-      this.handelDBException(error);
-    }
+    const { limit = 10, offset = 0 } = paginationDto;
+    return this.offerModel.find().limit(limit).skip(offset).exec();
   }
 
   async findOne(id: string): Promise<Offer> {
-    try {
-      const offer = await this.offerModel.findById(id).exec();
-      if (!offer) {
-        throw new NotFoundException(`Offer with id: '${id}' not found`);
-      }
-      return offer;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const offer = await this.offerModel.findById(id).exec();
+    if (!offer) {
+      throw new NotFoundException(`Offer with id: '${id}' not found`);
     }
+    return offer;
   }
 
   async update(id: string, updateOfferDto: UpdateOfferDto): Promise<Offer> {
-    try {
-      const offer = await this.offerModel.findByIdAndUpdate(id, updateOfferDto, { new: true }).exec();
-      if (!offer) {
-        throw new NotFoundException(`Offer with id: '${id}' not found`);
-      }
-      return offer;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const offer = await this.offerModel.findByIdAndUpdate(id, updateOfferDto, { new: true }).exec();
+    if (!offer) {
+      throw new NotFoundException(`Offer with id: '${id}' not found`);
     }
+    return offer;
   }
 
   async remove(id: string) {
-    try {
-      const offer = await this.offerModel.findByIdAndDelete(id).exec();
-      if (!offer) {
-        throw new NotFoundException(`Offer with id: '${id}' not found`);
-      }
-      return `Offer with the id: '${id}' was removed`;
-
-    } catch (error) {
-      this.handelDBException(error);
+    const offer = await this.offerModel.findByIdAndDelete(id).exec();
+    if (!offer) {
+      throw new NotFoundException(`Offer with id: '${id}' not found`);
     }
+    return `Offer with the id: '${id}' was removed`;
   }
 
   async addPrice(id: string, price: any): Promise<Offer> {
-    try {
-      const offer = await this.offerModel.findById(id).exec();
-      if (!offer) {
-        throw new NotFoundException(`Offer with id: '${id}' not found`);
-      }
-      offer.prices.push(price);
-      return offer.save();
-
-    } catch (error) {
-      this.handelDBException(error);
+    const offer = await this.offerModel.findById(id).exec();
+    if (!offer) {
+      throw new NotFoundException(`Offer with id: '${id}' not found`);
     }
+    offer.prices.push(price);
+    return offer.save();
   }
 
   private handelDBException(error: any): never {
