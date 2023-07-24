@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PicturesService } from './pictures.service';
@@ -6,6 +7,7 @@ import { UpdatePictureDto } from './dto/update-picture.dto';
 import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 
+@ApiTags('Pictures')
 @Controller('pictures')
 export class PicturesController {
   constructor(
