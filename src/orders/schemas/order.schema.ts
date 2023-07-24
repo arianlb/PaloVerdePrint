@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from "mongoose";
-import { Offer } from 'src/offers/schemas/offer.schema';
+import { Offer } from '../../offers/schemas/offer.schema';
 
 @Schema()
 export class Order extends Document {

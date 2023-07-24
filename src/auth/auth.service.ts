@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { BadRequestException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginUserDto } from './dto/login-user.dto';
-import { User } from 'src/users/schemas/user.schema';
+import { User } from '../users/schemas/user.schema';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()

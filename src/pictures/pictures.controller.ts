@@ -4,8 +4,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { PicturesService } from './pictures.service';
 import { CreatePictureDto } from './dto/create-picture.dto';
 import { UpdatePictureDto } from './dto/update-picture.dto';
-import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id.pipe';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { ParseMongoIdPipe } from '../common/pipes/parse-mongo-id.pipe';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 @ApiTags('Pictures')
 @Controller('pictures')

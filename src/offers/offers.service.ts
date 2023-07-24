@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Offer } from './schemas/offer.schema';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 @Injectable()
 export class OffersService {

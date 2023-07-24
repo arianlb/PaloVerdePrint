@@ -4,8 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreatePictureDto } from './dto/create-picture.dto';
 import { UpdatePictureDto } from './dto/update-picture.dto';
 import { Picture } from './schemas/picture.schema';
-import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { PaginationDto } from '../common/dto/pagination.dto';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
 export class PicturesService {

@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { GetUser } from './decorators/get-user.decorator';
-import { User } from 'src/users/schemas/user.schema';
+import { User } from '../users/schemas/user.schema';
 import { Auth } from './decorators/auth.decorator';
 import { ValidRoles } from './interfaces/valid-roles';
 
