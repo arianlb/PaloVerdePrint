@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { OffersService } from './offers.service';
 import { OffersController } from './offers.controller';
 import { Offer, OfferSchema } from './schemas/offer.schema';
+import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 
 @Module({
   controllers: [OffersController],
@@ -14,6 +15,7 @@ import { Offer, OfferSchema } from './schemas/offer.schema';
         schema: OfferSchema,
       }
     ]),
+    CloudinaryModule
   ],
 })
 export class OffersModule { }

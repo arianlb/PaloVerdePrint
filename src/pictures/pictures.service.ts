@@ -51,10 +51,7 @@ export class PicturesService {
   }
 
   async remove(id: string): Promise<string> {
-    const picture = await this.pictureModel.findById(id).exec();
-    if (!picture) {
-      throw new BadRequestException(`Picture with id: '${id}' not found`);
-    }
+    const picture = await this.findOne(id);
 
     //TODO: Hacer esto mejor
     if (picture.url !== 'No image') {

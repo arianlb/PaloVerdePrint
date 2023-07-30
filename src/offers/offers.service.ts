@@ -5,17 +5,23 @@ import { Offer } from './schemas/offer.schema';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
 export class OffersService {
   private readonly logger = new Logger('OffersService');
   constructor(
     @InjectModel(Offer.name)
-    private readonly offerModel: Model<Offer>
+    private readonly offerModel: Model<Offer>,
+    private readonly cloudinaryService: CloudinaryService
   ) { }
 
-  async create(createOfferDto: CreateOfferDto): Promise<Offer> {
+  async create(createOfferDto: CreateOfferDto, file: Express.Multer.File): Promise<Offer> {
     try {
+      if (file) {
+        const { secure_url } = await this.cloudinaryService.uploadFile(file);
+        createOfferDto.image = secure_url;
+      }
       return this.offerModel.create(createOfferDto);
 
     } catch (error) {
@@ -45,10 +51,15 @@ export class OffersService {
   }
 
   async remove(id: string) {
-    const offer = await this.offerModel.findByIdAndDelete(id).exec();
-    if (!offer) {
-      throw new NotFoundException(`Offer with id: '${id}' not found`);
+    const offer = await this.findOne(id);
+
+    if (offer.image !== 'No image') {
+      const publicId = offer.image.split('/').pop().split('.')[0];
+      await this.cloudinaryService.deleteFile(publicId);
     }
+
+    await this.offerModel.findByIdAndDelete(id).exec();
+
     return `Offer with the id: '${id}' was removed`;
   }
 

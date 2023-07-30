@@ -1,5 +1,6 @@
 import { ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { OffersService } from './offers.service';
 import { CreateOfferDto } from './dto/create-offer.dto';
 import { UpdateOfferDto } from './dto/update-offer.dto';
@@ -13,8 +14,12 @@ export class OffersController {
   constructor(private readonly offersService: OffersService) { }
 
   @Post()
-  create(@Body() createOfferDto: CreateOfferDto) {
-    return this.offersService.create(createOfferDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(
+    @Body() createOfferDto: CreateOfferDto,
+    @UploadedFile() file: Express.Multer.File
+  ) {
+    return this.offersService.create(createOfferDto, file);
   }
 
   @Get()

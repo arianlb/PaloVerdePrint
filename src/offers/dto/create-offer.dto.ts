@@ -1,14 +1,20 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, MinLength, } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateOfferDto {
     @ApiProperty()
     @IsString()
-    @MinLength(1)
+    @IsNotEmpty()
     title: string;
 
     @ApiProperty()
     @IsString()
-    @MinLength(1)
+    @IsNotEmpty()
     material: string;
+
+    @ApiProperty()
+    @IsOptional()
+    @IsString()
+    @IsNotEmpty()
+    image?: string;
 }

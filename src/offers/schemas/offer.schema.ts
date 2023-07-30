@@ -10,6 +10,9 @@ export class Offer extends Document {
     @Prop({ required: true })
     material: string;
 
+    @Prop({ default: 'No image' })
+    image: string;
+
     @Prop([PriceSchema])
     prices: Price[];
 }
