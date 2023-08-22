@@ -53,7 +53,7 @@ export class OffersService {
   async remove(id: string) {
     const offer = await this.findOne(id);
 
-    if (offer.image !== 'No image') {
+    if (offer.image !== 'No_image') {
       const publicId = offer.image.split('/').pop().split('.')[0];
       await this.cloudinaryService.deleteFile(publicId);
     }

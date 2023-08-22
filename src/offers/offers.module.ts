@@ -8,6 +8,7 @@ import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 @Module({
   controllers: [OffersController],
   providers: [OffersService],
+  exports: [OffersService],
   imports: [
     MongooseModule.forFeature([
       {

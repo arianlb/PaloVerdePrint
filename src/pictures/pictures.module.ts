@@ -8,6 +8,7 @@ import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 @Module({
   controllers: [PicturesController],
   providers: [PicturesService],
+  exports: [PicturesService],
   imports: [
     MongooseModule.forFeature([
       {

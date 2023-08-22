@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
+import { Wish } from '../../wishes/schemas/wish.schema';
 
 @Schema()
 export class User extends Document {
@@ -20,6 +21,9 @@ export class User extends Document {
         default: ['ROLE_USER']
     })
     roles: string[];
+
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Wish' }] })
+    wishes: Wish[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

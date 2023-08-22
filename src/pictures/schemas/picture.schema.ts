@@ -6,7 +6,7 @@ export class Picture extends Document {
     @Prop({ required: true })
     name: string;
 
-    @Prop({ default: 'No image' })
+    @Prop({ default: 'No_image' })
     url: string;
 
     @Prop({ required: true })

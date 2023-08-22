@@ -54,7 +54,7 @@ export class PicturesService {
     const picture = await this.findOne(id);
 
     //TODO: Hacer esto mejor
-    if (picture.url !== 'No image') {
+    if (picture.url !== 'No_image') {
       const publicId = picture.url.split('/').pop().split('.')[0];
       await this.cloudinaryService.deleteFile(publicId);
     }
