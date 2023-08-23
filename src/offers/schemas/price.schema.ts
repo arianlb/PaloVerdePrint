@@ -7,10 +7,7 @@ export class Price extends Document {
     value: number;
 
     @Prop({ required: true })
-    high: number;
-
-    @Prop({ required: true })
-    width: number;
+    size: string;
 }
 
 export const PriceSchema = SchemaFactory.createForClass(Price);

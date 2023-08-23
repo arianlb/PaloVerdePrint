@@ -24,6 +24,6 @@ export class CreateOrderDto {
 
     @ApiProperty()
     @IsArray()
-    @IsMongoId()
+    @IsMongoId({ each: true })
     wishes: string[];
 }

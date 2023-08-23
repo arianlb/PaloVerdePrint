@@ -21,11 +21,8 @@ export class Wish extends Document {
     @Prop({ default: 1 })
     amount: number;
 
-    @Prop()
-    high: number;
-
-    @Prop()
-    width: number;
+    @Prop({ required: true })
+    size: string;
 }
 
 export const WishSchema = SchemaFactory.createForClass(Wish);

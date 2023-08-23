@@ -35,8 +35,7 @@ export class WishesService {
       ownImage: file ? true : false,
       price: price.value * createWishDto.amount,
       amount: createWishDto.amount,
-      high: price.high,
-      width: price.width,
+      size: price.size
     };
 
     if (file) {

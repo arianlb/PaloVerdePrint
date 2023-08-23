@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt, IsNumber, Min, IsPositive } from "class-validator";
+import { IsNumber, Min, IsString, MinLength } from "class-validator";
 
 export class CreatePriceDto {
     @ApiProperty()
@@ -8,12 +8,7 @@ export class CreatePriceDto {
     value: number;
 
     @ApiProperty()
-    @IsInt()
-    @IsPositive()
-    high: number;
-
-    @ApiProperty()
-    @IsInt()
-    @IsPositive()
-    width: number;
+    @IsString()
+    @MinLength(3)
+    size: string;
 }
