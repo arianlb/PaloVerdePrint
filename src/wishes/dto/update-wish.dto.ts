@@ -1,4 +1,10 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateWishDto } from './create-wish.dto';
+/*import { PartialType } from '@nestjs/swagger';
+import { CreateWishDto } from './create-wish.dto';*/
 
-export class UpdateWishDto extends PartialType(CreateWishDto) {}
+import { IsInt, Min } from "class-validator";
+
+export class UpdateWishDto {
+    @IsInt()
+    @Min(1)
+    readonly amount: number;
+}

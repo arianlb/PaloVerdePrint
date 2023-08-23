@@ -16,7 +16,10 @@ export class Wish extends Document {
     ownImage: boolean;
 
     @Prop({ default: 0 })
-    price: number;
+    sizePrice: number;
+
+    @Prop({ default: 0 })
+    photoPrice: number;
 
     @Prop({ default: 1 })
     amount: number;

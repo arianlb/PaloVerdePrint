@@ -33,7 +33,8 @@ export class WishesService {
       material: offer.material,
       image: null,
       ownImage: file ? true : false,
-      price: price.value * createWishDto.amount,
+      sizePrice: price.value,
+      photoPrice: 0,
       amount: createWishDto.amount,
       size: price.size
     };
@@ -45,7 +46,7 @@ export class WishesService {
     } else {
       const picture = await this.picturesService.findOne(createWishDto.picture);
       wishDto.image = picture.url;
-      wishDto.price += picture.price;
+      wishDto.photoPrice = picture.price;
     }
 
     const wish = await this.wishModel.create(wishDto);
@@ -65,7 +66,9 @@ export class WishesService {
   }
 
   async update(id: string, updateWishDto: UpdateWishDto) {
-    return `This action updates a #${id} wish`;
+    const wish = await this.wishModel.findByIdAndUpdate(id, updateWishDto, { new: true }).exec();
+    if (!wish) throw new NotFoundException(`Wish with id: '${id}' not found`);
+    return wish;
   }
 
   async remove(id: string) {
