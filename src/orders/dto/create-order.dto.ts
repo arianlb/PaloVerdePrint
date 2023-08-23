@@ -1,16 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsIn, IsMongoId, IsNumber, IsOptional, IsString, Min, MinLength } from "class-validator";
+import { IsArray, IsDate, IsIn, IsMongoId, IsNumber, IsOptional, IsString, Min } from "class-validator";
 
 export class CreateOrderDto {
     @ApiProperty()
     @IsOptional()
     @IsDate()
     createdAt?: Date;
-
-    @ApiProperty()
-    @IsString()
-    @MinLength(1)
-    image: string;
 
     @ApiProperty()
     @IsNumber()
@@ -25,5 +20,10 @@ export class CreateOrderDto {
 
     @ApiProperty()
     @IsMongoId()
-    offer: string;
+    user: string;
+
+    @ApiProperty()
+    @IsArray()
+    @IsMongoId()
+    wishes: string[];
 }

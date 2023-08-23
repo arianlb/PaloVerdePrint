@@ -1,14 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from "mongoose";
-import { Offer } from '../../offers/schemas/offer.schema';
+import { User } from '../../users/schemas/user.schema';
+import { Wish } from '../../wishes/schemas/wish.schema';
 
 @Schema()
 export class Order extends Document {
     @Prop({ type: Date, default: Date.now })
     createdAt: Date;
-
-    @Prop({ required: true })
-    image: string;
 
     @Prop({ default: 0 })
     paid: number;
@@ -16,8 +14,11 @@ export class Order extends Document {
     @Prop({ default: 'Pending' })
     status: string;
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Offer' })
-    offer: Offer;
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+    user: User;
+
+    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Wish' }] })
+    wishes: Wish[];
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);
