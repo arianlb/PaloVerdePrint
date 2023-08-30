@@ -39,7 +39,7 @@ export class AuthService {
     }
     return {
       user,
-      //token: this.generateJWT({ uid: user._id })
+      token: this.generateJWT({ uid: user._id })
     };
   }
 
