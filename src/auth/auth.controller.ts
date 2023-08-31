@@ -1,6 +1,6 @@
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { Controller, Get, Post, Body, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpCode, UseGuards, Put } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -20,7 +20,7 @@ export class AuthController {
   }
 
   @HttpCode(200)
-  @Get('login')
+  @Put('login')
   loginUser(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);
   }
