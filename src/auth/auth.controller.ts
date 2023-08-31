@@ -1,6 +1,6 @@
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { Controller, Get, Post, Body, HttpCode, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpCode, UseGuards, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { LoginUserDto } from './dto/login-user.dto';
@@ -23,6 +23,12 @@ export class AuthController {
   @Post('login')
   loginUser(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);
+  }
+
+  @HttpCode(200)
+  @Post('logintwo')
+  loginUser2(@Req() req) {
+    return 'hola   ' + req.body;
   }
 
   @Get('check')
